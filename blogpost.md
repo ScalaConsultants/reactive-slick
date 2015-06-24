@@ -1,3 +1,18 @@
+---
+comments: true
+date: 2015-06-25 10:00:00
+layout: post
+slug: slick-3-overview
+title: At ScalaC we've recently started adopting Slick 3.0. If you haven't tried it yet, hopefully these notes will make the process go smoother
+author: Radek Tkaczyk
+feed_group: scala
+tags:
+- Scala
+- Slick
+- SQL
+---
+
+
 # A Quick Overview of Slick 3.0
 
 At ScalaC we've recently started adopting [Slick 3.0](http://slick.typesafe.com/news/2015/04/29/slick-3.0.0-released.html). If you haven't tried it yet, hopefully these notes will make the process go smoother.
