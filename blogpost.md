@@ -3,7 +3,8 @@ comments: true
 date: 2015-06-25 10:00:00
 layout: post
 slug: slick-3-overview
-title: At ScalaC we've recently started adopting Slick 3.0. If you haven't tried it yet, hopefully these notes will make the process go smoother
+title: A Quick Overview of Slick 3.0
+summary: At ScalaC we've recently started adopting Slick 3.0. If you haven't tried it yet, hopefully these notes will make the process go smoother
 author: Radek Tkaczyk
 feed_group: scala
 tags:
@@ -60,7 +61,7 @@ It could be even simpler if we decided a priori on what database engine to choos
 Another feature to note here is that Slick now by default uses HikariCP for connection pooling (it still needs to provided as a build dependency). You can configure it to your needs, choose to disable it, or provide a third-party connection pool implementation, all via Typesafe Config.
 
 ## Actions
-Slick 3.0 has been dubbed reactive and the main connsequence is that we would expect to see futures instead of plain result types when querying the database. However there's also an intermediate type `DBIOAction` which is a monad-like trait wrapping the result. In code they are usualy referred by the type alias `DBIO` and can be processed via the usual combinators like `map`, `flatMap`, `andThen`. Let's look at an example:
+Slick 3.0 has been dubbed "reactive" and as you might expect that means querying is now asynchronous. Thus all interactions with a database return futures instead of plain result types. However there's also an intermediate type `DBIOAction` which is a monad-like trait wrapping the result. In code they are usually referred by the type alias `DBIO` and can be processed via the usual combinators like `map`, `flatMap`, `andThen`. Let's look at an example:
 
 ```
   val action: DBIO[Seq[String]] = suppliers.map(_.name).result
@@ -191,8 +192,10 @@ Quite neat. However, I don't see myself using this feature anytime soon. Making 
 
 ## Conclusions 
 
-That's all the major changes I wanted to present it this post. I think we can agree that Slick is heading the right direction, not only in following the reactive trend, but also in making the API more expresive and consistent that consequently makes our code look better (it even shows in the imports).
+That's all the major changes I wanted to present in this post. I think we can agree that Slick is heading the right direction, not only in following the reactive trend, but also in making the API more expresive and consistent that consequently makes our code look better (it even shows in the imports).
 
 There are of course things to look forward to in subsequent releases. The DSL still has its limitations and generated SQL is far from perfect (see my [previous post](http://blog.scalac.io/2015/01/27/rough-experience-with-slick.html) which is still valid for the latest release). According to Stefan Zeiger query compilation will be improved in Slick 3.1 (see [here](http://www.infoq.com/news/2015/05/slick3))
 
 Anyway, at ScalaC, we have already been using Slick 3.0 in some of our projects, and so far no major complaints. Since the query DSL hasn't changed noticeably the transition is rather easy (that doesn't necessarily mean migration) which is another reason I definitely recommend it for your next project.
+ 
+You can check out the code used in this post from our [repo](https://github.com/ScalaConsultants/reactive-slick). 
